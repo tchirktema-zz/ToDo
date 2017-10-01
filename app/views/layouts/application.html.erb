@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TODO</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <!-- title-->
+          <div class="mdl-layout-title"><%= link_to "TODO" , root_path %></div>
+          <!-- spacer-->
+          <div class="mdl-layout-spacer"></div>
+          
+         
+          <nav class="mdl-navigation mdl-layout--large-screen-only">
+            <% if user_signed_in?%>
+              <div  class=" notification" id="notification">Item</div>
+              <%= link_to " New Item ", new_item_path,:class=>"mdl-navigation__link" %>
+              
+
+              <ul class="mdl-menu mdl-list mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right mdl-shadow--2dp" for="notification">
+
+                <li class="mdl-menu__item mdl-list__item list__item--border-top">
+                    <span class="mdl-list__item-primary-content">
+                        <span><%= link_to "Completed Item", items_path(complete: true) %></span>
+                    </span>  
+                </li>
+                <li class="mdl-menu__item mdl-list__item list__item--border-top">
+                    <span class="mdl-list__item-primary-content">
+                        <span><%= link_to "Imcompleted Item", items_path(complete: false) %></span>
+                    </span>  
+                </li> 
+                <li class="mdl-menu__item mdl-list__item list__item--border-top">
+                    <span class="mdl-list__item-primary-content">
+                        <span><%= link_to "All Item", items_path %></span>
+                    </span>  
+                </li>            
+              </ul>
+
+            <% end -%> 
+            <% if current_user.present? %>
+                <%= link_to " Sign Out", destroy_user_session_path, method: :delete,:class=>"mdl-navigation__link" %>
+            <%else %>
+                <%= link_to " Log In", new_user_session_path,:class=>"mdl-navigation__link" %>
+                <%= link_to " Sign Up", new_user_registration_path,:class=>"mdl-navigation__link" %>
+            <%end%>
+          </nav>
+        </div>
+      </header>
+      <div class="mdl-layout__drawer">
+          <div class="mdl-layout-title"><%= link_to "TODO" , root_path %></div>
+          <!-- spacer-->
+          
+          <nav class="mdl-navigation ">
+            <% if user_signed_in?%>
+                
+                <%= link_to " New Item ", new_item_path,:class=>"mdl-navigation__link" %>
+                <%= link_to "Imcompleted Item", items_path(complete: false),:class=>"mdl-navigation__link"%>
+                <%= link_to "Completed Item", items_path(complete: true),:class=>"mdl-navigation__link"%>
+            <% end -%> 
+            <% if current_user.present? %>
+                <%= link_to " Sign Out", destroy_user_session_path, method: :delete,:class=>"mdl-navigation__link" %>
+            <%else %>
+                <%= link_to " Log In", new_user_session_path,:class=>"mdl-navigation__link" %>
+                <%= link_to " Sign Up", new_user_registration_path,:class=>"mdl-navigation__link" %>
+            <%end%>
+      </div>
+
+      <main class="layout__content">
+        <div class="page-content">
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+      
+          <%= yield %>
+        </div>
+      </main>
+    </div>
+
+
+  </body>
+</html>

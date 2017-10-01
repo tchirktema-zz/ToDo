@@ -1,0 +1,14 @@
+<div class="mdl-grid mdl-shadow--2dp">
+	<div class="mdl-cell mdl-cell--10-col mdl-cell--1-offset-desktop">
+		<h1><%= @item.title %></h1>
+		<p><%= @item.description %></p>
+
+		<div class="mdl-cell mdl-cell--6-col-desktop mdl-cell--3-offset-desktop">
+			<%= link_to "Back", root_path %> |
+			<%= link_to "Edit", edit_item_path(@item) %> |
+			<%= link_to "Delete", item_path(@item),method: :delete, data: {confirm:"are your sure to delete item "}%>
+		</div>
+		
+	</div>
+	
+</div>

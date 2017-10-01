@@ -1,0 +1,91 @@
+	<% if user_signed_in? %>
+		<div class="md-grid">
+			<div class="mdl-cell mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
+				<% @items.each do |item| %>
+					<!-- if item was complete -->
+					<% if item.completed? %>
+				
+						<section class="mdl-grid mdl-shadow--2dp">
+							<header class="mdl-cell mdl-cell--2-col-desktop mdl-cell--2-col-tablet mdl-cell--2-col-phone mdl-color--teal-100 mdl-color-text--white">
+				              <div class="mdl-cell mdl-cell--2-col-desktop">
+				              	<p>
+				              		<%= link_to complete_item_path(item), method: :patch do %>	</p>
+										<i class="material-icons">check</i>
+
+				              		<% end -%>
+				              </div>
+				              
+				              <div class="mdl-cell mdl-cell--2-col-desktop">
+				              	<p>
+				              		<%= link_to item, method: :delete, data: {confirm:"Are you sure to delete this item"} do %>	</p>
+										<i class="material-icons">delete_sweep</i>
+
+
+				              		<% end -%>
+				              </div>
+				            </header>	
+
+				            <div class="mdl-card mdl-cell mdl-cell--8-col-desktop mdl-cell--8-col-tablet mdl-cell--8-col-phone">
+				              <div class="mdl-card__supporting-text completed">
+				                	<h4><strike><%= link_to item.title, item %></strike></h4>
+				               		<p> 
+				               			<%= item.description %>
+				               		</p>
+				               		<p>
+				               			Completed : <%= time_ago_in_words(item.completed_at) %>
+				               		</p>
+				              </div>
+				               <div class="mdl-card__actions">
+				               	<%= link_to "Read more",item,:class=>"mdl-button" %>
+				                
+				              </div>
+				            </div>
+														
+						</section>
+					<% else %>
+						<!-- if item was'n complete -->
+						<section class="mdl-grid mdl-shadow--2dp imcompleted">
+
+				            <div class="mdl-card mdl-cell mdl-cell--10-col-desktop mdl-cell--10-col-tablet mdl-cell--10-col-phone">
+				              <div class="mdl-card__supporting-text ">
+				                <h4><%= link_to item.title, item %></h4>
+				                <p>
+				               		<%= item.description %>
+				               	</p>
+
+				               	<p>
+				               			Created: <%= time_ago_in_words(item.created_at) %>
+				               		</p>
+				              </div>
+				               <div class="mdl-card__actions">
+				               	<%= link_to "Read more",item,:class=>"mdl-button" %>
+				                
+				              </div>
+				            </div>
+							<header class="mdl-cell mdl-cell--2-col-desktop mdl-cell--2-col-tablet mdl-cell--2-col-phone mdl-color--teal-100 mdl-color-text--white">
+				              <div class="mdl-cell mdl-cell--2-col-desktop">
+				              	<p>
+				              		<%= link_to complete_item_path(item), method: :patch do %>	</p>
+										<i class="material-icons">check</i>
+
+				              		<% end -%>
+				              </div>
+
+				              <div class="mdl-cell mdl-cell--2-col-desktop">
+				              	<p>
+				              		<%= link_to item, method: :delete, data: {confirm:"Are you sure to delete imcomplete item"} do %>	</p>
+										<i class="material-icons">delete_sweep</i>
+
+
+				              		<% end -%>
+				              </div>
+				            </header>							
+						</section>
+						<br>
+					<% end -%>
+				<% end -%>
+			</div>
+		</div>
+	<%else %>
+		<%= render "welcome-page" %>
+	<% end -%>
