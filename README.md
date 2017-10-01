@@ -5,7 +5,7 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version 2.4
 
 * System dependencies
 
@@ -13,7 +13,7 @@ Things you may want to cover:
 
 * Database creation
 
-* Database initialization
+* Database initialization  
 
 * How to run the test suite
 
@@ -21,4 +21,10 @@ Things you may want to cover:
 
 * Deployment instructions
 
-* ...
+  - cd ToDo
+  - bundle install
+  - rake db:create
+  - rails s
+
+
+ open the project via the browser http://localhost:3000
